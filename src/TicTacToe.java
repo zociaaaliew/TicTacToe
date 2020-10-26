@@ -14,35 +14,41 @@ public class TicTacToe {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		requestPlayersName();
+		Scanner scan = new Scanner(System.in);
+
+		requestPlayersName(scan);
 		printGameBoard(gameBoard);
 
 		while (endGame != true) {
 
 			try {
-				playerOneTurn();
+				playerOneTurn(scan);
 			} catch (Exception e) {
 				System.out.println("You have entred an invalid box.");
+				scan.nextLine();
 
 				try {
-					playerOneTurn();
+					playerOneTurn(scan);
 				} catch (Exception miss) {
 					System.out
 							.println("You have entred an invalid box again. " + player1 + ", You will miss a turn. \n");
+					scan.nextLine();
 				}
 			}
 
 			if (endGame != true) {
 				try {
-					playerTwoTurn();
+					playerTwoTurn(scan);
 				} catch (Exception e) {
 					System.out.println("You have entred an invalid box.");
+					scan.nextLine();
 
 					try {
-						playerTwoTurn();
+						playerTwoTurn(scan);
 					} catch (Exception miss) {
 						System.out.println(
 								"You have entred an invalid box again. " + player2 + ", You will miss a turn. \n");
+						scan.nextLine();
 					}
 				}
 
@@ -57,36 +63,36 @@ public class TicTacToe {
 			for (char c : row) {
 				System.out.print(c);
 			}
-			
+
 			System.out.println();
 		}
-		
+
 		System.out.println();
 	}
-	
-	public static void requestPlayersName() {
-		
-		Scanner scanNames = new Scanner(System.in);
+
+	public static void requestPlayersName(Scanner scan) {
+
 		System.out.print("Enter name for Player 1:");
-		if (scanNames.hasNextLine()) {
-			player1 = scanNames.nextLine();
+		if (scan.hasNextLine()) {
+			player1 = scan.nextLine();
 		}
 
 		System.out.print("Enter name for Player 2:");
-		if (scanNames.hasNextLine()) {
-			player2 = scanNames.nextLine();
+		if (scan.hasNextLine()) {
+			player2 = scan.nextLine();
 		}
+
 	}
 
-	public static void playerOneTurn() {
+	public static void playerOneTurn(Scanner scan) {
 
-		Scanner scanMove1 = new Scanner(System.in);
+		// Scanner scan = new Scanner(System.in);
 		System.out.print(player1 + ", choose a box to place an your move:");
-		int move1 = scanMove1.nextInt();
+		int move1 = scan.nextInt();
 
 		while (playerTwoPos.contains(move1) || playerTwoPos.contains(playerOnePos) || playerOnePos.contains(move1)) {
 			System.out.println("The box is taken. " + player1 + ", please enter another box number:");
-			move1 = scanMove1.nextInt();
+			move1 = scan.nextInt();
 		}
 
 		updateMoves(gameBoard, move1, player1);
@@ -96,17 +102,17 @@ public class TicTacToe {
 		if (playerOneWon.length() > 0) {
 			System.out.println(playerOneWon);
 		}
+
 	}
 
-	public static void playerTwoTurn() {
+	public static void playerTwoTurn(Scanner scan) {
 
-		Scanner scanMove2 = new Scanner(System.in);
 		System.out.print(player2 + ", choose a box to place an your move:");
-		int move2 = scanMove2.nextInt();
+		int move2 = scan.nextInt();
 
 		while (playerOnePos.contains(move2) || playerOnePos.contains(playerTwoPos) || playerTwoPos.contains(move2)) {
 			System.out.println("The box is taken. Please enter another box number:");
-			move2 = scanMove2.nextInt();
+			move2 = scan.nextInt();
 		}
 		updateMoves(gameBoard, move2, player2);
 		printGameBoard(gameBoard);
@@ -115,6 +121,7 @@ public class TicTacToe {
 		if (playerTwoWon.length() > 0) {
 			System.out.println(playerTwoWon);
 		}
+
 	}
 
 	public static void updateMoves(char[][] gameBoard, int move, String player) {
