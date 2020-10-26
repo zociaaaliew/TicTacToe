@@ -14,7 +14,6 @@ public class TicTacToe {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		
 		// Scanner takes in user input
 		Scanner scan = new Scanner(System.in);
 		
@@ -29,11 +28,11 @@ public class TicTacToe {
 				try {
 					playerOneTurn(scan);
 				} catch (Exception e) {
+					
 					//prompt player 1 to re-enter a selection if player 1 entered an invalid input
 					System.out.println("You have entred an invalid box.");
 					scan.nextLine();
 					playerOneTryAgain(scan);
-
 				}
 
 				//check if game has ended
@@ -49,14 +48,11 @@ public class TicTacToe {
 						scan.nextLine();
 						playerTwoTryAgain(scan);
 					}
-
 				}
-
 			}
 		} finally {
 			scan.close();
 		}
-
 	}
 
 	public static void printGameBoard(char[][] gameBoard) {
@@ -66,10 +62,8 @@ public class TicTacToe {
 			for (char c : row) {
 				System.out.print(c);
 			}
-
 			System.out.println();
 		}
-
 		System.out.println();
 	}
 
@@ -110,7 +104,6 @@ public class TicTacToe {
 		if (playerOneWon.length() > 0) {
 			System.out.println(playerOneWon);
 		}
-
 	}
 
 	public static void playerTwoTurn(Scanner scan) {
@@ -134,7 +127,6 @@ public class TicTacToe {
 		if (playerTwoWon.length() > 0) {
 			System.out.println(playerTwoWon);
 		}
-
 	}
 
 	public static void playerOneTryAgain(Scanner scan) {
@@ -254,8 +246,6 @@ public class TicTacToe {
 				return (playerTie);
 			}
 		}
-
 		return "";
 	}
-
 }
