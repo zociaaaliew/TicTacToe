@@ -13,37 +13,37 @@ public class TicTacToe {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+
 		// Scanner takes in user input
 		Scanner scan = new Scanner(System.in);
-		
+
 		try {
 			requestPlayersName(scan);
 			printGameBoard(gameBoard);
 
-			//check if the game has ended
+			// check if the game has ended
 			while (endGame != true) {
-				
+
 				// prompt player 1
 				try {
 					playerOneTurn(scan);
 				} catch (Exception e) {
-					
-					//prompt player 1 to re-enter a selection if player 1 entered an invalid input
+
+					// prompt player 1 to re-enter a selection if player 1 entered an invalid input
 					System.out.println("You have entred an invalid box.");
 					scan.nextLine();
 					playerOneTryAgain(scan);
 				}
 
-				//check if game has ended
+				// check if game has ended
 				if (endGame != true) {
-					
+
 					// prompt player 2
 					try {
 						playerTwoTurn(scan);
 					} catch (Exception e) {
-						
-						//prompt player 2 to re-enter a selection if player 1 entered an invalid input
+
+						// prompt player 2 to re-enter a selection if player 1 entered an invalid input
 						System.out.println("You have entred an invalid box.");
 						scan.nextLine();
 						playerTwoTryAgain(scan);
@@ -83,14 +83,14 @@ public class TicTacToe {
 	}
 
 	public static void playerOneTurn(Scanner scan) {
-		//this method prompt player 1 to make a move
+		// this method prompt player 1 to make a move
 
 		System.out.print(player1 + ", choose a box to place an your move:");
 		int move1 = scan.nextInt();
 
-		//check if the box entered is available
+		// check if the box entered is available
 		while (playerTwoPos.contains(move1) || playerTwoPos.contains(playerOnePos) || playerOnePos.contains(move1)) {
-			
+
 			// if Box is taken, prompt player 1 to choose another box
 			System.out.println("The box is taken. " + player1 + ", please enter another box number:");
 			move1 = scan.nextInt();
@@ -107,14 +107,14 @@ public class TicTacToe {
 	}
 
 	public static void playerTwoTurn(Scanner scan) {
-		//this method prompt player 2 to make a move
+		// this method prompt player 2 to make a move
 
 		System.out.print(player2 + ", choose a box to place an your move:");
 		int move2 = scan.nextInt();
 
-		//check if the box entered is available
+		// check if the box entered is available
 		while (playerOnePos.contains(move2) || playerOnePos.contains(playerTwoPos) || playerTwoPos.contains(move2)) {
-			
+
 			// if Box is taken, prompt player 2 to choose another box
 			System.out.println("The box is taken. Please enter another box number:");
 			move2 = scan.nextInt();
@@ -160,7 +160,7 @@ public class TicTacToe {
 			piece = 'X';
 			// update and record all player 1's selection
 			playerOnePos.add(move);
-			
+
 		} else if (player.equals(player2)) {
 			piece = 'O';
 			// update and record all player 2's selection
