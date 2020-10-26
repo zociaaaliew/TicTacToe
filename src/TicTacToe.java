@@ -15,46 +15,38 @@ public class TicTacToe {
 		// TODO Auto-generated method stub
 
 		Scanner scan = new Scanner(System.in);
+		
+		try {
+			requestPlayersName(scan);
+			printGameBoard(gameBoard);
 
-		requestPlayersName(scan);
-		printGameBoard(gameBoard);
-
-		while (endGame != true) {
-
-			try {
-				playerOneTurn(scan);
-			} catch (Exception e) {
-				System.out.println("You have entred an invalid box.");
-				scan.nextLine();
+			while (endGame != true) {
 
 				try {
 					playerOneTurn(scan);
-				} catch (Exception miss) {
-					System.out
-							.println("You have entred an invalid box again. " + player1 + ", You will miss a turn. \n");
-					scan.nextLine();
-				}
-			}
-
-			if (endGame != true) {
-				try {
-					playerTwoTurn(scan);
 				} catch (Exception e) {
 					System.out.println("You have entred an invalid box.");
 					scan.nextLine();
+					playerOneTryAgain(scan);
 
+				}
+
+				if (endGame != true) {
 					try {
 						playerTwoTurn(scan);
-					} catch (Exception miss) {
-						System.out.println(
-								"You have entred an invalid box again. " + player2 + ", You will miss a turn. \n");
+					} catch (Exception e) {
+						System.out.println("You have entred an invalid box.");
 						scan.nextLine();
+						playerTwoTryAgain(scan);
 					}
+
 				}
 
 			}
-
+		} finally {
+			scan.close();
 		}
+
 	}
 
 	public static void printGameBoard(char[][] gameBoard) {
@@ -122,6 +114,26 @@ public class TicTacToe {
 			System.out.println(playerTwoWon);
 		}
 
+	}
+
+	public static void playerOneTryAgain(Scanner scan) {
+
+		try {
+			playerOneTurn(scan);
+		} catch (Exception miss) {
+			System.out.println("You have entred an invalid box again. " + player1 + ", You will miss a turn. \n");
+			scan.nextLine();
+		}
+	}
+
+	public static void playerTwoTryAgain(Scanner scan) {
+
+		try {
+			playerOneTurn(scan);
+		} catch (Exception miss) {
+			System.out.println("You have entred an invalid box again. " + player2 + ", You will miss a turn. \n");
+			scan.nextLine();
+		}
 	}
 
 	public static void updateMoves(char[][] gameBoard, int move, String player) {
